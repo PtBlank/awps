@@ -23,13 +23,13 @@
  */
 if ( file_exists( __DIR__ . '/wp-content/themes/awps/vendor/autoload.php' ) ) :
 	require_once __DIR__ . '/wp-content/themes/awps/vendor/autoload.php';
-	$dotenv = new Dotenv\Dotenv( __DIR__ );
+	$dotenv = Dotenv\Dotenv::create( __DIR__ );
 	$dotenv->load();
 endif;
 
 if ( file_exists( dirname( __DIR__ ) . '/wp-content/themes/awps/vendor/autoload.php' ) ) :
 	require_once dirname( __DIR__ ) . '/wp-content/themes/awps/vendor/autoload.php';
-	$dotenv = new Dotenv\Dotenv( dirname( __DIR__ ) );
+	$dotenv = Dotenv\Dotenv::create( dirname( __DIR__ ) );
 	$dotenv->load();
 endif;
 
@@ -96,6 +96,9 @@ $table_prefix = getenv( 'DB_PREFIX' );
  */
 
 define( 'WP_DEBUG', getenv( 'APP_ENV' ) === 'development' ? true : false );
+define( 'JETPACK_DEV_DEBUG', getenv( 'APP_ENV' ) === 'development' ? true : false );
+define( 'WPCF7_AUTOP', getenv( 'WPCF7_AUTOP' ) );
+define( 'FS_METHOD', 'direct' );
 
 /**
  * Define home and site url
@@ -117,14 +120,6 @@ define( 'WP_POST_REVISIONS', getenv( 'WP_POST_REVISIONS' ) );
  */
 
 define( 'EMPTY_TRASH_DAYS', getenv( 'EMPTY_TRASH_DAYS' ) );
-
-/**
- * Increase PHP memory limit
- *
- * This might not work for some hosting providers
- */
-
-define( 'WP_MEMORY_LIMIT', getenv( 'WP_MEMORY_LIMIT' ) );
 
 /* That's all, stop editing! Happy blogging. */
 
